@@ -8,9 +8,9 @@ namespace BethanyPieShop.Model
     public class OrderRepository : IOrderRepository
     {
         private readonly AppDbContext _appDbContext;
-        private readonly AppDbContext _shoppingCart;
+        private readonly ShoppingCart _shoppingCart;
 
-        public OrderRepository(AppDbContext appDbContext, AppDbContext shoppingCart)
+        public OrderRepository(AppDbContext appDbContext, ShoppingCart shoppingCart)
         {
             _appDbContext = appDbContext;
             _shoppingCart = shoppingCart;
@@ -22,6 +22,7 @@ namespace BethanyPieShop.Model
 
             _appDbContext.Orders.Add(order);
             var shoppingCartItems = _shoppingCart.ShoppingCartItems;
+            order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
 
             order.OrderDetails = new List<OrderDetail>();
 
