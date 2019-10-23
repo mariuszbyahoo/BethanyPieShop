@@ -12,7 +12,7 @@ namespace BethanyPieShop.Model
         {
 
         }
-
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
         public DbSet<Pie> Pies { get; set; }
 
         public DbSet<Category> Categories { get; set; }
