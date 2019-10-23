@@ -23,6 +23,10 @@ namespace BethanyPieShop.Model
             _appDbContext.Orders.Add(order);
             var shoppingCartItems = _shoppingCart.ShoppingCartItems;
 
+            order.OrderDetails = new List<OrderDetail>();
+
+            // Czasem nie wszystkie obiekty kl. Pie w 'shoppingCartItems'
+            // mają przypisaną jakąś wartość.
             foreach (var shoppingCartItem in shoppingCartItems)
             {
                 var orderDetail = new OrderDetail()
@@ -32,9 +36,10 @@ namespace BethanyPieShop.Model
                     OrderId = order.OrderId,
                     Price = shoppingCartItem.Pie.Price
                 };
+                order.OrderDetails.Add(orderDetail);
 
-                _appDbContext.OrderDetails.Add(orderDetail);
             };
+            _appDbContext.Orders.Add(order);
 
             _appDbContext.SaveChanges();
         }
