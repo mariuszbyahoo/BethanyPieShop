@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace BethanyPieShop.Model
 {
-    public class AppDbContext : DbContext
+    // CS0433_4.cs
+    // compile with: /reference:Microsoft.Extensions.Identity.Stores, Version=3.0.0.0
+    public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
